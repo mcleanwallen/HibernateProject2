@@ -1,9 +1,6 @@
 package entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Myclasses {
@@ -89,5 +86,16 @@ public class Myclasses {
         result = 31 * result + classCode;
         result = 31 * result + (classProfessor != null ? classProfessor.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Myclasses{" +
+                "myClassId=" + myClassId +
+                ", className='" + className + '\'' +
+                ", classSubject='" + classSubject + '\'' +
+                ", classCode=" + classCode +
+                ", classProfessor='" + classProfessor + '\'' +
+                '}';
     }
 }

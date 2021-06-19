@@ -1,9 +1,6 @@
 import entity.Myclasses;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,12 +11,10 @@ public class Main {
         try {
             transaction.begin();
 
-            Myclasses senoirProject = new Myclasses();
-            senoirProject.setClassName("Senoir Project");
-            senoirProject.setClassCode(495);
-            senoirProject.setClassSubject("CIT");
-            senoirProject.setClassProfessor("Robertson");
-            entityManager.persist(senoirProject);
+            Query countOfClasses = entityManager.createNativeQuery("SELECT count(*) AS Amount_of_CIT_classes " +
+                    "FROM myclasses " +
+                    "WHERE classCode <> 'CIT'");
+            System.out.println("I have "+countOfClasses.getSingleResult()+" CIT classes.");
 
             transaction.commit();
         } finally {
